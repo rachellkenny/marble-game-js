@@ -1,0 +1,251 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<title>Marbles</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0">
+	</head>
+
+	<body>
+        <div id="winner"></div>
+        <canvas id="marbleCanvas" width ="1200" height="600" style="border: 0px solid black;"></canvas>
+        
+        <script>
+            var canvas = document.getElementById("marbleCanvas");
+            var ctx = canvas.getContext("2d");
+            
+            var lgRadius = 20; 
+            var smRadius = 10;
+            
+            var message = "rrooyyggbbiivvRrRrBggbbiivvRrRrBvIiGggGOOrRYyyGOvRrORRoorrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyOOOoyGrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyrRYyOOOoyGOogGoOgrrvRrORRoorrBBBBbbbbBbggOogGoOgrrvRrORRoorrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyvIiGggGOOrRrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyrRYyOOOoyGOogGoOgrrvRrORRoorrBBBBbbbbBbggYyyGOvRrORRoorrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyrRYyOOOoyGOogGoOgrrvRrORRoorrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyggbbiivvRrRrBvIiGggGOOrRYyyGOvRrORRoorrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyOOOoyGOogGoOgrrvRrORRoorrBBBBbbbbyrRYBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyyOOOoyGOogGoOgrrrryyyYyYyyyyyrRYyyGrryyyYyYyyyyyrRYyyGogGoOgrrrryyyYyYyyyyyOOOoobiivvRrorRyYrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyrRYyOOOoyGOogGoOgrrvRrORRoorrBBBBbbbbBbggYYyYyYGGOOooYbiivvvRrORRoorrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyOOOoyGrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyrRYyOOOoyGOogGoOgrrvRrORRoorrBBBBbbbbBbggOogGoOgrrrryyyYyYyyyyyrRYyyGRrrogbYYyyroroRORbiivvRrORRoorrvRrORRoorrBBBBbbbbBbggGgGgGGvRrORRoorrBBBByrRYbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRggbbiivvRrRrBvIiGggGOOrRYyyGOvRrORRoorrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyOOOoyGOogGoOgrrvRrORRoorrBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyryrRYRYyyGOogGoOgrrrryyyYyrRYyyGOogGoOgrrrryyyYyYyyyyyOOOoyGOogGoOgrrrryyyYyYyyyyyrRYyyGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyOOOoyGOogGoOgrrrryyyYyYyyyyyrRYyyGBBBBbbbbBbggGgGgGGgoYYoyYoYIIIIiiIiIiBigBigBbIrrRYyrRYyyGOogGoOgrrrryyyYyYyyyyyOOOoyGOogGoOgrrrryyyYyYyyyyyrRYyyGOogGoOgrrrryyyYyYyyyyyOOOoOOOoOoOoRrOROYGBIVroygbivBbBbBbOoOoOoRrRrbbBBggGGGGGgggbbbbbBbRrRrRrOrRYyyGOogGoOgrrrryyyYyYyyyyyOOOooRrOoRrGbiivvRrGOGggOgbiivvRrgRrrrGgYyYyyygYyrgYYbBbbb";   
+            
+            drawMarbles();
+            remove();
+            
+// draw marbles function 
+            function drawMarbles(){
+                
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+                
+                var x = 20; 
+                var y = 20;  
+                
+                
+            for (var i = 0; i < message.length; i++){
+                switch(message.charAt(i)){
+                       case "R":
+                       color = "red"; 
+                       radius = lgRadius;
+                       break;
+                        
+                       case "r":
+                       color = "red"; 
+                       radius = smRadius; 
+                       break;
+                        
+                       case "O":
+                       color = "orange"; 
+                       radius = lgRadius; 
+                       break;
+                        
+                       case "o":
+                       color = "orange"; 
+                       radius = smRadius; 
+                       break;
+                        
+                       case "Y":
+                       color = "yellow"; 
+                       radius = lgRadius; 
+                       break;
+                        
+                       case "y":
+                       color = "yellow"; 
+                       radius = smRadius; 
+                       break;
+                        
+                       case "G":
+                       color = "green"; 
+                       radius = lgRadius; 
+                       break;
+                        
+                       case "g":
+                       color = "green"; 
+                       radius = smRadius;
+                       break;
+                        
+                       case "B":
+                       color = "blue"; 
+                       radius = lgRadius;
+                       break;
+                        
+                       case "b":
+                       color = "blue"; 
+                       radius = smRadius; 
+                       break;
+                        
+                       case "I":
+                       color = "indigo"; 
+                       radius = lgRadius;
+                       break;
+                        
+                       case "i":
+                       color = "indigo"; 
+                       radius = smRadius;
+                       break;
+                        
+                       case "V":
+                       color = "violet"; 
+                       radius = lgRadius;
+                       break;
+                        
+                       case "v":
+                       color = "violet"; 
+                       radius = smRadius;
+                       break;
+                        
+                       }
+                       
+              if (x >= canvas.width - radius){
+                        y += 40;
+                        x = 20; 
+                }
+                
+              ctx.beginPath(); 
+		      ctx.arc(x, y, radius, 0, 2*Math.PI); 
+		      ctx.fillStyle = color; 
+		      ctx.fill(); 
+		      ctx.closePath();
+        
+                
+// logic to determine spacing 
+            var currMarble = message.charAt(i); 
+            var nextMarble = message.charAt(i+1); 
+    
+            if (currMarble == currMarble.toLowerCase() && nextMarble == nextMarble.toLowerCase()){
+                x += 20; 
+            }
+            else if(currMarble == currMarble.toUpperCase() && nextMarble == nextMarble.toUpperCase()){
+                x += 40; 
+            }
+            else if(currMarble == currMarble.toUpperCase() && nextMarble == nextMarble.toLowerCase()){
+                x += 30; 
+            }
+            else x += 30; 
+             
+        }
+    }
+            
+// remove function
+            function remove() { 
+                
+                originalLength = message.length;
+                message = message.replace("Rr", "");
+                message = message.replace("rR", "");
+                message = message.replace("Oo", "");
+                message = message.replace("oO", "");
+                message = message.replace("Yy", "");
+                message = message.replace("yY", "");
+                message = message.replace("Gg", "");
+                message = message.replace("gG", "");
+                message = message.replace("Bb", "");
+                message = message.replace("bB", "");
+                message = message.replace("Ii", "");
+                message = message.replace("iI", "");
+                message = message.replace("Vv", "");
+                message = message.replace("vV", "");
+                message = message; 
+                
+                newLength = message.length; 
+               
+                if(originalLength == newLength){ 
+                    countMarbles(); 
+                    return; 
+                }  
+                 
+                setTimeout(function() { 
+                    drawMarbles(); 
+                    remove(); 
+                }, 50);
+                
+                
+            } 
+            
+// count winner
+            function countMarbles(){
+            console.log("message length: " + message.length);
+            var countR=0, countO=0, countY=0, countG=0, countB=0, countI=0, countV = 0; 
+            var winningColor = ''; 
+                
+            for (var i = 0; i<message.length; i++){
+                switch(message.charAt(i)){  
+                   
+                    case 'R':
+                    case 'r':
+                        countR++; 
+                        break; 
+                    case 'O':
+                    case 'o': 
+                        countO++;
+                        break;
+                    case 'Y': 
+                    case 'y':
+                        countY++; 
+                        break; 
+                    case 'G':
+                    case 'g':
+                        countG++; 
+                        break; 
+                    case 'B':
+                    case 'b':
+                        countB++; 
+                        break;
+                    case 'I':
+                    case 'i':
+                        countI++; 
+                        break; 
+                    case 'V':
+                    case 'v':
+                        countV++; 
+                        break; 
+                }
+            }
+                mostMarbles = Math.max(countR, countO, countY, countG, countB, countI, countV);
+        
+                switch(mostMarbles){
+                    case countR: 
+                    winningColor = "Red"; 
+                    break; 
+                        
+                    case countO:
+                    winningColor = "Orange";
+                    break; 
+                        
+                    case countY:
+                    winningColor = "Yellow";
+                    break; 
+                    
+                    case countG: 
+                    winningColor = "Green";
+                    break; 
+                    
+                    case countG:
+                    winningColor = "Blue";
+                    break; 
+                        
+                    case countI:
+                    winningColor = "Indigo";
+                    break; 
+                        
+                    case countV:
+                    winningColor = "Violet";
+                    break; 
+                }
+                
+                winMsg = winningColor + " wins with " + mostMarbles + " marbles.";
+                document.getElementById("winner").innerHTML = winMsg;  
+        }  
+
+        </script>
+    </body>
+</html>
